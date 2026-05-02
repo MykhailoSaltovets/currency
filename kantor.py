@@ -45,3 +45,17 @@ class UAH(Currency):
 class PLN(Currency):
     def description(self):
         return "PLN"
+
+class Exchange():
+    def __init__(self):
+        self._currencies = {}
+        self._history = {}
+
+    def add_currency(self, currency: Currency):
+        self._currencies[currency.code] = currency
+
+    def get_currency_codes(self):
+        return list(self._currencies.keys())
+
+    def get_history(self):
+        return list(self._history)
