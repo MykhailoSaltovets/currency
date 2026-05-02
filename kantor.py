@@ -1,0 +1,29 @@
+from abc import ABC, abstractmethod
+
+class Currency(ABC):
+    def __init__(self, code, buy_rate, sell_rate, commission_percent = 0):
+        self._code = code
+        self._buy_rate = buy_rate
+        self._sell_rate = sell_rate
+        self._commission_percent = commission_percent
+
+    @property
+    def code(self):
+        return self._code
+
+    def _adjust_rate_for_amount(self, rate, amount):
+        if amount > 5000:
+            return rate * 0.99
+        elif amount >1000:
+            return rate * 0.995
+        return rate
+
+    def apply_commission(self, value):
+        commision_value = value * (self._commission_percent / 100)
+        return value + commision_value, commision_value
+
+    @abstractmethod
+    def description(self):
+        pass
+
+
