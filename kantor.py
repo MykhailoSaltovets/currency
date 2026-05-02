@@ -26,4 +26,22 @@ class Currency(ABC):
     def description(self):
         pass
 
+class EUR(Currency):
+    def description(self):
+        return "EUR"
 
+class USD(Currency):
+    def description(self):
+        return "USD"
+
+class GBP(Currency):
+    def description(self):
+        return "GBP"
+
+class UAH(Currency):
+    def description(self):
+        return "UAH"
+
+class PLN(Currency):
+    def description(self):
+        return "PLN"
