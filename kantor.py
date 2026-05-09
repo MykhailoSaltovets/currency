@@ -1,30 +1,30 @@
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod (previous version)
 
-class Currency(ABC):
-    def __init__(self, code, buy_rate, sell_rate, commission_percent = 0):
+class Currency():
+    def __init__(self, code, rate, commission_percent = 0):
         self._code = code
-        self._buy_rate = buy_rate
-        self._sell_rate = sell_rate
-        self._commission_percent = commission_percent
+        self.rate = rate
+        self.commission_percent = commission_percent
 
-    @property
-    def code(self):
-        return self._code
-
-    def _adjust_rate_for_amount(self, rate, amount):
-        if amount > 5000:
-            return rate * 0.99
-        elif amount >1000:
-            return rate * 0.995
-        return rate
+    def adjust_rate(self, amount):
+        return self.rate
 
     def apply_commission(self, value):
-        commision_value = value * (self._commission_percent / 100)
-        return value + commision_value, commision_value
+        return value * (1 + self.commission_percent/100)
 
-    @abstractmethod
-    def description(self):
-        pass
+    def to_pln(self, amount):
+        rate = self.adjust_rate(amount)
+        value = amount * rate
+        return self.apply_commission(value)
+
+    def from_pln(self, amount):
+        rate = self.apply_commission(amount)
+        value = amount / rate
+        return self.apply_commission(value)
+
+    def convert_to(self, other, amount):
+        pln_value = self.to_pln(amount)
+        return other.from_pln(pln_value)
 
 class EUR(Currency):
     def description(self):
@@ -59,3 +59,11 @@ class Exchange():
 
     def get_history(self):
         return list(self._history)
+
+    def convert(self, amount, from_code, to_code):
+        if from_code = to_code:
+            raise ValueError("Currencies are equal")
+        if from_code not in self._currencies or to_code not in self._currencies:
+            raise ValueError("Currencies not found")
+        from_cur = self._currencies[from_code]
+        to_cur = self._currencies[to_code]
