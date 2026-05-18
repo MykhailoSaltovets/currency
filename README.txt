@@ -1,13 +1,19 @@
-The project is a currency exchange program. The idea is for the user to enter an amount and select the source and destination currencies, and the program will calculate the result.
+Project Description: Currency Exchange Simulator
+Project Overview
+This is a software model of a currency exchange office, written in Python.
+ The program can handle several currencies (Dollar, Euro, Hryvnia, Zloty, and British Pound)
+  and processes the entire exchange operation, from verifying the banknote to dispensing the funds.
 
-The program will support several currencies, such as the UAH, USD, EUR, and PLN. Buying and selling rates will be set for each currency, just like at real currency exchange offices.
+What the system can do:
 
-A commission will also be added for some currencies, along with a slight adjustment to the exchange rate depending on the amount (for example, if the amount is large, the rate will be slightly more favorable).
+Verify banknote authenticity: Before conducting an exchange, the system checks the banknote.
+Each currency has its own unique security features (Dollars are checked for microprinting,
+Hryvnias under ultraviolet light, Pounds by holograms, etc.). If a banknote is fake, the exchange
+is canceled.
 
-The program will have two versions:
+Convert via a base currency: All exchanges between any two currencies (for example, USD to EUR)
+are routed through a central base currency — the Polish Zloty (PLN).
 
-a simple console version (via keyboard input)
-a graphical interface with buttons and lists (using Tkinter)
-Tests to verify that the exchange works correctly.
-
-Overall, this will be currency exchange model that demonstrates working with classes, polymorphism, calculations, and the user interface.
+Account for commissions and rate fluctuations: Each currency has its own set
+commission fee. Additionally, before every exchange, the exchange rate is automatically adjusted
+(for example, the Dollar might strengthen, while the Euro might weaken).
